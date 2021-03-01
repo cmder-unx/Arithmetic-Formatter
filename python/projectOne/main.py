@@ -1,5 +1,6 @@
 from math import sqrt
 import re
+from pprint import pprint
 
 def goToSpace(toSpaced, nb, sign):
     nbSpaces = int(sqrt((len(toSpaced[0])-len(toSpaced[1]))**2))
@@ -99,14 +100,19 @@ def arithmetic_arranger(problems, answers=False):
         btwClc = "    "
         for c in clc:
             csplit = c.split("\n")
-            top.append(csplit[0]+btwClc)
-            bot.append(csplit[1]+btwClc)
-            sep.append(csplit[2]+btwClc)
-            rslt.append(csplit[3]+btwClc)
+            if c != clc[-1]:
+                top.append(csplit[0]+btwClc)
+                bot.append(csplit[1]+btwClc)
+                sep.append(csplit[2]+btwClc)
+                rslt.append(csplit[3]+btwClc)
+            else:
+                top.append(csplit[0])
+                bot.append(csplit[1])
+                sep.append(csplit[2])
+                rslt.append(csplit[3])
         top[-1]+="\n"
         bot[-1]+="\n"
-        sep[-1]+="\n"
-        rslt[-1]+="\n"
+        sep[-1]+="\n" if answers == True else ""
         tp, bt, sp, rt = "", "", "", ""
         for t in top:
             tp+=t
@@ -116,7 +122,7 @@ def arithmetic_arranger(problems, answers=False):
             sp+=s
         for r in rslt:
             rt+=r
-        arranged_problems = tp+bt+sp+rt
+        arranged_problems = tp+bt+sp+rt if answers == True else tp+bt+sp
         return arranged_problems
 
-#print(arithmetic_arranger(["2000-200", "2000 + 2000", "20-2000", "20+2000", "2000 + 20"], True))
+#pprint(arithmetic_arranger(["3 + 855", "3801 - 2", "45 + 43", "123 + 49"]))
