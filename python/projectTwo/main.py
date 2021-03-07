@@ -20,7 +20,7 @@ def add_time(start_time, duration, starting_day=""):
         return "Error, minutes must be less than 60"
     
     if ending.lower() == "am":
-        nbDays = 0
+        nbDays = 1
         if rsltM < 60:
             if rsltH <= 12:
                 ending = "am"
@@ -51,7 +51,7 @@ def add_time(start_time, duration, starting_day=""):
         nxtD = " (next day)" if nbDays == 1 else ""
         new_time = rsltH+":"+str(rsltM)+" "+ending.upper()+nxtD
     elif ending.lower() == "pm":
-        nbDays = 0
+        nbDays = 1
         if rsltM < 60:
             if rsltH <= 12:
                 ending = "pm"
@@ -99,12 +99,19 @@ def add_time(start_time, duration, starting_day=""):
                     tD_later = ", "+days[nD_index]+" "+"(2 days later)"
                     new_time+=tD_later
                 elif nbDays > 2:
-                    xD_later = " ("+str(nbDays)+" days later)"
+                    strtD_index = days.index(starting_day)
+                    nD_index = nbDays+strtD_index
+                    while nD_index > 6:
+                        nD_index-=7
+                    xD_later = ", "+days[nD_index]+" ("+str(nbDays)+" days later)"
                     new_time+=xD_later
-                
         else:
             return "Error, your starting day isn't a valid day."
+    elif not starting_day:
+        if nbDays > 2:
+            xD_later = " ("+str(nbDays)+" days later)"
+            new_time+=xD_later
     
     return new_time
 
-print(add_time("5:39 AM", "48:01", "saturday"))
+print(add_time("11:59 PM", "24:05", "Wednesday"))
