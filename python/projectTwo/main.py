@@ -48,6 +48,7 @@ def add_time(start_time, duration, starting_day=""):
                     rsltH-=12
                     ending = "pm"
         rsltH = "0"+str(rsltH) if len(str(rsltH)) < 2 else str(rsltH)
+        rsltM = "0"+str(rsltM) if len(str(rsltM)) < 2 else str(rsltM)
         nxtD = " (next day)" if nbDays == 1 else ""
         new_time = rsltH+":"+str(rsltM)+" "+ending.upper()+nxtD
     elif ending.lower() == "pm":
@@ -79,6 +80,7 @@ def add_time(start_time, duration, starting_day=""):
                     rsltH-=12
                     ending = "am"
         rsltH = "0"+str(rsltH) if len(str(rsltH)) < 2 else str(rsltH)
+        rsltM = "0"+str(rsltM) if len(str(rsltM)) < 2 else str(rsltM)
         nxtD = " (next day)" if nbDays == 1 else ""
         new_time = rsltH+":"+str(rsltM)+" "+ending.upper()+nxtD
     else:
@@ -114,4 +116,4 @@ def add_time(start_time, duration, starting_day=""):
     
     return new_time
 
-print(add_time("11:59 PM", "24:05", "Wednesday"))
+print(add_time("11:55 AM", "3:12"))
