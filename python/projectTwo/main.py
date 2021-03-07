@@ -49,7 +49,7 @@ def add_time(start_time, duration, starting_day=""):
                     ending = "pm"
         rsltH = "0"+str(rsltH) if len(str(rsltH)) < 2 else str(rsltH)
         nxtD = " (next day)" if nbDays == 1 else ""
-        display = rsltH+":"+str(rsltM)+" "+ending.upper()+nxtD
+        new_time = rsltH+":"+str(rsltM)+" "+ending.upper()+nxtD
     elif ending.lower() == "pm":
         nbDays = 0
         if rsltM < 60:
@@ -80,7 +80,7 @@ def add_time(start_time, duration, starting_day=""):
                     ending = "am"
         rsltH = "0"+str(rsltH) if len(str(rsltH)) < 2 else str(rsltH)
         nxtD = " (next day)" if nbDays == 1 else ""
-        display = rsltH+":"+str(rsltM)+" "+ending.upper()+nxtD
+        new_time = rsltH+":"+str(rsltM)+" "+ending.upper()+nxtD
     else:
         return "Error, ending must be AM or PM."
     
@@ -90,21 +90,21 @@ def add_time(start_time, duration, starting_day=""):
             if not nxtD:
                 if nbDays == 0:
                     starting_day = ", "+starting_day
-                    display+=starting_day
+                    new_time+=starting_day
                 elif nbDays == 2:
                     strtD_index = days.index(starting_day)
                     nD_index = nbDays+strtD_index
                     if nD_index > 6:
                         nD_index-=7
                     tD_later = ", "+days[nD_index]+" "+"(2 days later)"
-                    display+=tD_later
+                    new_time+=tD_later
                 elif nbDays > 2:
                     xD_later = " ("+str(nbDays)+" days later)"
-                    display+=xD_later
+                    new_time+=xD_later
                 
         else:
             return "Error, your starting day isn't a valid day."
     
-    return display
+    return new_time
 
 print(add_time("5:39 AM", "48:01", "saturday"))
